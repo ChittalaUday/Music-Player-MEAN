@@ -1,0 +1,226 @@
+.profile-container {
+  padding: var(--space-8);
+  font-family: var(--font-primary);
+  color: var(--color-on-surface);
+
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--radius-full);
+  border: 3px solid var(--color-primary);
+  object-fit: cover;
+}
+
+.profile-header h2 {
+  font-size: var(--text-3xl);
+  margin: 0;
+}
+
+.profile-header p {
+  margin: 0;
+  color: var(--color-on-surface-dim);
+  font-size: var(--text-sm);
+}
+
+.bio-section {
+  width: max-content;
+  margin-bottom: var(--space-8);
+  background: var(--color-surface-variant);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+}
+
+.bio-section h3 {
+  margin-top: 0;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-lg);
+}
+
+.bio-section p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.profile-stats {
+  display: flex;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: var(--color-surface);
+  padding: var(--space-5);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-width: 180px;
+}
+
+.stat-card span {
+  font-size: 1.8rem;
+}
+
+.stat-card h3 {
+  margin: 0;
+  font-size: var(--text-xl);
+}
+
+.stat-card p {
+  margin: 0;
+  color: var(--color-on-surface-dim);
+  font-size: var(--text-sm);
+}
+
+.action-buttons {
+  display: flex;
+  gap: var(--space-4);
+}
+
+button {
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-base);
+  font-family: var(--font-ui);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-normal);
+  background: var(--color-primary);
+  color: white;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button.logout {
+  background: var(--color-error);
+}
+
+button.cancel-button {
+  background: var(--color-surface);
+  color: var(--color-on-surface);
+  border: 1px solid var(--color-outline);
+}
+
+/* Edit form styles */
+.edit-profile-form {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-3);
+}
+
+.edit-profile-form h2 {
+  margin-top: 0;
+  margin-bottom: var(--space-6);
+  font-size: var(--text-2xl);
+  color: var(--color-primary);
+}
+
+.form-group {
+  margin-bottom: var(--space-5);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-weight: 500;
+  color: var(--color-on-surface);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: var(--space-3);
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius-md);
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  background: var(--color-surface-variant);
+  color: var(--color-on-surface);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.2);
+}
+
+.error-message {
+  color: var(--color-error);
+  font-size: var(--text-sm);
+  margin-top: var(--space-1);
+}
+
+.avatar-upload {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.upload-controls {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-button {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: var(--space-2);
+}
+
+.form-buttons {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .avatar-upload {
+    flex-direction: column;
+  }
+
+  .profile-stats {
+    justify-content: center;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+  }
+
+  .form-buttons button {
+    margin-bottom: var(--space-3);
+  }
+}

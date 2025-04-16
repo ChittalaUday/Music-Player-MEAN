@@ -1,0 +1,47 @@
+.main-layout-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+app-sidebar {
+  width: 240px;
+  background-color: var(--color-surface);
+  border-right: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-1);
+  position: relative;
+  z-index: 101;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  background: var(--color-bg);
+}
+
+main > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4);
+  overflow-y: auto;
+  padding-bottom: 100px; /* space for bottom player */
+}
+
+/* Bottom Music Player */
+app-bottom-music-player {
+  position: relative;
+  width: 100%;
+  z-index: 100 ;
+}
+
+/* Music Player (non-bottom, if needed in outlet) */
+app-music-player {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--space-4);
+}
+

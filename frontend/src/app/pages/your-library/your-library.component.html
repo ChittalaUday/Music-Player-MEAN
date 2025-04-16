@@ -1,0 +1,15 @@
+<div class="library-container">
+  <h2>📚 Your Library</h2>
+
+  <div class="upload-container">
+    <button class="upload-button" (click)="togglePLaylist()">
+      <span class="material-icons">playlist_add</span> {{ showPlaylist ? 'Cancel Playlist' : 'New Playlist' }}
+    </button>
+    <button class="upload-button" (click)="toggleUploader()">
+      <span class="material-icons">add</span> {{ showUploader ? 'Cancel Upload' : 'Upload Song' }}
+    </button>
+  </div>
+  <app-playlist></app-playlist>
+
+  <app-upload-song *ngIf="showUploader"></app-upload-song>
+</div>

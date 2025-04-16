@@ -1,0 +1,12 @@
+<div class="modal-overlay" >
+  <div class="upload-container card">
+    <h2>Upload a Song</h2>
+
+    <input type="file" (change)="onFileSelected($event)" />
+    <button (click)="uploadSong()" [disabled]="!selectedFile || isUploading">
+      {{ isUploading ? 'Uploading...' : 'Upload Song' }}
+    </button>
+
+    <p *ngIf="uploadMessage">{{ uploadMessage }}</p>
+  </div>
+</div>

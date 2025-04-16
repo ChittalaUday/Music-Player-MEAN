@@ -1,0 +1,33 @@
+<div class="glass-panel player-container">
+  <div class="flex items-center justify-between w-full gap-4">
+    <!-- Song Info -->
+    <div class="flex items-center gap-4">
+      <div class="album-artwork" style="width: 48px; height: 48px;">
+        <img src="https://via.placeholder.com/48" alt="Album Art">
+      </div>
+      <div>
+        <div class="track-title">Track Name</div>
+        <div class="artist-name">Artist Name</div>
+      </div>
+    </div>
+
+    <!-- Player Controls -->
+    <div class="player-controls">
+      <button class="control-btn"><span>&laquo;</span></button>
+      <button class="control-btn play-pause" (click)="togglePlay()">
+        <span *ngIf="!isPlaying">&#9654;</span>
+        <span *ngIf="isPlaying">&#10073;&#10073;</span>
+      </button>
+      <button class="control-btn"><span>&raquo;</span></button>
+    </div>
+
+    <!-- Time and Progress -->
+    <div class="flex-col items-end w-1/3">
+      <div class="flex justify-between text-xs timestamp w-full">
+        <span>1:12</span>
+        <span>3:45</span>
+      </div>
+      <input type="range" class="slider" [value]="progress" />
+    </div>
+  </div>
+</div>

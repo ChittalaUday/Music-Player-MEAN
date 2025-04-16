@@ -1,0 +1,36 @@
+<div class="home-container">
+  <div class="welcome">
+    <h1>👋Welcome Back, {{name}}!</h1>
+    <span style="font-size: 1rem; font-weight: normal;">Hope you're ready for some great music 🎶</span>
+  </div>
+
+  <div>
+    <div class="section-title">🔥 Trending Songs</div>
+    <div class="card-grid">
+      <div class="card" *ngFor="let song of [1, 2, 3, 4]">
+        <img src="https://via.placeholder.com/150" alt="Trending song" />
+        <div class="card-title">Hit Song {{ song }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">⏪ Recently Played</div>
+    <div class="card-grid">
+      <div class="card" *ngFor="let recent of [1, 2, 3]">
+        <img src="https://via.placeholder.com/150" alt="Recent song" />
+        <div class="card-title">Track {{ recent }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">💿 Albums</div>
+    <div class="card-grid">
+      <div class="card" *ngFor="let album of [1, 2, 3, 4, 5]">
+        <img src="https://via.placeholder.com/150" alt="Album cover" />
+        <div class="card-title">Album {{ album }}</div>
+      </div>
+    </div>
+  </div>
+</div>

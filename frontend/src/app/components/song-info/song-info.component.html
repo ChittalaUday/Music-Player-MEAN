@@ -1,0 +1,55 @@
+<div class="song-info-modal" *ngIf="visible">
+  <div class="song-info-content">
+    <span class="close-button material-icons" (click)="close.emit()">close</span>
+
+    <div class="song-cover-and-actions">
+      <img [src]="song.coverImageUrl" alt="{{ song.title }} cover" />
+
+      <div class="song-actions">
+        <button class="action-button" (click)="play.emit(song)">
+          <span class="material-icons">play_arrow</span> Play
+        </button>
+        <button class="action-button" (click)="addToLibrary.emit(song)">
+          <span class="material-icons">library_add</span> Add to Library
+        </button>
+        <button class="action-button" (click)="toggleFavorite.emit(song)">
+          <span class="material-icons">
+            {{ isFavorite(song) ? 'favorite' : 'favorite_border' }}
+          </span>
+          {{ isFavorite(song) ? 'Remove from Favorites' : 'Add to Favorites' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="song-info-text">
+      <h2>{{ song.title }}</h2>
+      <p><strong>Song ID:</strong> {{ song._id }}</p>
+      <p><strong>Artist:</strong> {{ song.artist }}</p>
+      <p><strong>Album:</strong> {{ song.album }}</p>
+      <p><strong>Genre:</strong> {{ song.genre.join(', ') }}</p>
+      <p><strong>Year:</strong> {{ song.year }}</p>
+      <p><strong>Duration:</strong> {{ song.duration ?? 0 | formatDuration }}</p>
+      <p><strong>Composer:</strong> {{ song.composer }}</p>
+
+      <div class="tags-section">
+        <h4>Tags:</h4>
+        <div class="tags-list">
+          <span class="tag" *ngFor="let tag of song.tags">
+            {{ tag }}
+            <span class="remove-tag" (click)="removeTag(tag)">×</span>
+          </span>
+        </div>
+
+        <div class="add-tag-form">
+          <input
+            type="text"
+            [(ngModel)]="newTag"
+            placeholder="Add tag..."
+            (keyup.enter)="addTag()"
+          />
+          <button (click)="addTag()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

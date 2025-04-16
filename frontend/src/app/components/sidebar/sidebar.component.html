@@ -1,0 +1,44 @@
+<!-- File: src/app/components/sidebar/sidebar.component.html -->
+
+<aside class="sidebar-container glass-panel">
+  <div class="sidebar-header">
+    <div class="logo">
+      <span class="logo-icon">♪</span>
+      <h1 class="logo-text">Harmony</h1>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <ul class="nav-list">
+      <li *ngFor="let item of menuItems"
+          class="nav-item"
+          [ngClass]="{'active': item.active}"
+          (click)="setActiveItem(item)">
+        <a [routerLink]="item.link" class="nav-link">
+          <span class="material-icons">{{item.icon}}</span>
+          <span class="nav-label">{{item.label}}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-section">
+    <h2 class="sidebar-title">Your Playlists</h2>
+    <ul class="playlist-list">
+      <li *ngFor="let playlist of playlists" class="playlist-item">
+        <a [routerLink]="['/playlist/'+playlist._id]" class="playlist-link">
+          {{playlist.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="sidebar-footer">
+    <button class="btn btn-secondary" (click)="toggleUploader()">
+      <span class="material-icons">{{showUploader ? 'close':'add'}}</span>
+      <span>{{showUploader ? 'Cancel':'Upload Song'}} </span>
+    </button>
+  </div>
+</aside>
+
+<app-upload-song *ngIf="showUploader"></app-upload-song>

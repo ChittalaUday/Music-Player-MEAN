@@ -1,0 +1,87 @@
+<!-- Loading State with Animation -->
+<div *ngIf="loading" class="loading-container flex flex-col items-center justify-center">
+  <div class="loading-spinner"></div>
+  <p class="loading-text mt-4">Loading your playlist<span class="loading-dots"></span></p>
+</div>
+
+<!-- Main Playlist Container -->
+<div *ngIf="!loading" class="playlist-container fade-in">
+  <h1>🎵Playlist</h1>
+
+  <!-- Playlist Header -->
+  <div class="playlist-header glass-panel">
+    <div class="playlist-info">
+      <h2 class="playlist-title">{{ playlist?.name || 'My Playlist' }}</h2>
+      <p class="playlist-description">{{ playlist?.description || 'A collection of favorite tracks' }}</p>
+
+      <div class="playlist-stats flex gap-3 mt-2">
+        <div class="stat-item">
+          <span class="overline">Songs</span>
+          <span class="stat-value">{{ songs.length }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="overline">Duration</span>
+          <span class="stat-value">{{ totalDuration | formatDuration }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="overline">Created</span>
+          <span class="stat-value">{{ playlist?.createdAt | date }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="songs.length === 0" class="empty-state glass-panel flex flex-col items-center justify-center mt-4 fade-in">
+    <div class="icon-container mb-4">
+      <i class="material-icons">music_off</i>
+    </div>
+    <h3 class="subtitle-1">No songs available</h3>
+    <p class="body-2 text-dim">This playlist is empty. Add some tracks to get started.</p>
+  </div>
+
+  <!-- Songs Table -->
+  <div *ngIf="songs.length > 0" class="songs-table card mt-4 fade-in">
+    <!-- Table Header -->
+    <div class="table-header">
+      <div class="table-cell cell-num">#</div>
+      <div class="table-cell cell-title"> Title</div>
+      <div class="table-cell cell-artist"> Artist</div>
+      <div class="table-cell cell-album"> Album</div>
+      <div class="table-cell cell-duration">Duration</div>
+      <div class="table-cell cell-actions">Actions</div>
+    </div>
+
+    <!-- Table Body -->
+    <div class="table-body">
+      <div *ngFor="let song of songs; let i = index"
+           class="table-row slide-in-left"
+           [style.animation-delay]="i * 0.05 + 's'">
+        <div class="table-cell cell-num">{{ i + 1 }}</div>
+
+        <!-- Title + Cover -->
+        <div class="table-cell cell-title flex items-center gap-3">
+          <img [src]="song.coverImageUrl || 'assets/default-cover.jpg'" alt="Cover"
+               class="song-cover" />
+          <span>{{ song.title }}</span>
+        </div>
+
+        <div class="table-cell cell-artist">{{ song.artist }}</div>
+        <div class="table-cell cell-album">{{ song.album || 'Unknown' }}</div>
+        <div class="table-cell cell-duration">{{ song.duration || 0 | formatDuration }}</div>
+
+        <!-- Action Buttons (Play/Delete) -->
+        <div class="table-cell cell-actions">
+          <div class="track-actions flex items-center gap-2">
+            <button class="control-btn btn-animate play" (click)="playSong(song)" aria-label="Play song">
+              <i class="material-icons">play_arrow</i>
+            </button>
+            <button class="control-btn btn-animate delete" (click)="deleteSong(i)" aria-label="Delete song">
+              <i class="material-icons">delete</i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

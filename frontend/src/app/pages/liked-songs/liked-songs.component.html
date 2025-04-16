@@ -1,0 +1,13 @@
+<div class="liked-container">
+  <h2>❤️ Liked Songs</h2>
+
+  <div class="song-grid">
+    <div class="song-card" *ngFor="let song of likedSongs">
+      <div class="emoji">{{ song.emoji }}</div>
+      <div class="song-details">
+        <h3>{{ song.title }}</h3>
+        <p>{{ song.artist }}</p>
+      </div>
+    </div>
+  </div>
+</div>

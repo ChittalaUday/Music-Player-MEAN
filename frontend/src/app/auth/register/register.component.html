@@ -1,0 +1,165 @@
+<div class="register-container bg-gradient-animate bg-floating-particles">
+  <div class="register-card glass-panel">
+    <div class="register-header">
+      <h1>Create Account</h1>
+      <p class="subtitle-2 text-dim">Fill in the details to create a new account</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <div class="left-section">
+        <!-- Full Name Field -->
+        <div class="form-group">
+          <label for="name" class="label">Full Name *</label>
+          <div class="input-container" [class.input-error]="name?.invalid && name?.touched">
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              placeholder="Enter your full name"
+              autocomplete="name" />
+          </div>
+          <div class="error-message" *ngIf="name?.invalid && name?.touched">
+            <span *ngIf="name?.errors?.['required']">Name is required</span>
+          </div>
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email" class="label">Email *</label>
+          <div class="input-container" [class.input-error]="email?.invalid && email?.touched">
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              placeholder="your.email@example.com"
+              autocomplete="email">
+          </div>
+          <div class="error-message" *ngIf="email?.invalid && email?.touched">
+            <span *ngIf="email?.errors?.['required']">Email is required</span>
+            <span *ngIf="email?.errors?.['email']">Please enter a valid email</span>
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password" class="label">Password *</label>
+          <div class="input-container" [class.input-error]="password?.invalid && password?.touched">
+            <input
+              [type]="isPasswordVisible ? 'text' : 'password'"
+              id="password"
+              formControlName="password"
+              placeholder="Enter your password"
+              autocomplete="current-password">
+            <button
+              type="button"
+              class="input-icon-button"
+              (click)="togglePasswordVisibility()"
+              [attr.aria-label]="isPasswordVisible ? 'Hide password' : 'Show password'">
+              <span class="material-icons">
+                {{ isPasswordVisible ? 'visibility' : 'visibility_off' }}
+              </span>
+            </button>
+          </div>
+          <div class="error-message" *ngIf="password?.invalid && password?.touched">
+            <span *ngIf="password?.errors?.['required']">Password is required</span>
+            <span *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters</span>
+          </div>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="form-group">
+          <label for="confirmPassword" class="label">Confirm Password *</label>
+          <div class="input-container" [class.input-error]="confirmPassword?.invalid && confirmPassword?.touched">
+            <input
+              [type]="isPasswordVisible ? 'text' : 'password'"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              placeholder="Re-enter your password">
+          </div>
+          <div class="error-message" *ngIf="confirmPassword?.invalid && confirmPassword?.touched">
+            <span *ngIf="confirmPassword?.errors?.['required']">Confirm Password is required</span>
+            <span *ngIf="confirmPassword?.errors?.['mismatch']">Passwords must match</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="label">Gender</label>
+          <div >
+            <label class="radio-inline">
+              <input type="radio" value="Male" formControlName="gender" /> Male
+            </label>
+            <label class="radio-inline">
+              <input type="radio" value="Female" formControlName="gender" /> Female
+            </label>
+            <label class="radio-inline">
+              <input type="radio" value="Other" formControlName="gender" /> Other
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-section">
+        <!-- Profile Image -->
+        <div class="form-group">
+          <!-- Image Preview -->
+          <div *ngIf="imagePreview" class="image-preview">
+            <img [src]="imagePreview" alt="Profile Image Preview" />
+          </div>
+          <label for="image" class="label">Profile Image</label>
+          <div>
+            <input
+              type="file"
+              id="image"
+              (change)="onImageSelected($event)"
+              accept="image/*" />
+          </div>
+
+
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="form-group">
+
+          <div>
+
+          </div>
+          <label for="dob" class="label">Date of Birth</label>
+          <div class="input-container">
+            <input
+              type="date"
+              id="dob"
+              formControlName="dob" />
+          </div>
+        </div>
+
+        <!-- Bio -->
+        <div class="form-group">
+          <label for="bio" class="label">Bio</label>
+          <div class="input-container">
+            <textarea
+              id="bio"
+              formControlName="bio"
+              rows="3"
+              placeholder="Tell us something about yourself..."></textarea>
+          </div>
+        </div>
+
+        <!-- Gender -->
+
+      </div>
+
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="btn btn-primary w-full"
+        [disabled]="isSubmitting">
+        <span class="button-spinner" *ngIf="isSubmitting"></span>
+        <span>{{ isSubmitting ? 'Creating account...' : 'Create Account' }}</span>
+      </button>
+    </form>
+
+    <div class="subtitle-2" style="margin-top: 20px;">
+      <p class="body-2 text-center">Already have an account? <a class="login-link" href="/login">Click here</a></p>
+    </div>
+  </div>
+</div>

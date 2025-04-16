@@ -1,0 +1,99 @@
+<!-- playlist.component.html -->
+<div class="playlist-container">
+  <h1>📀My Library</h1>
+
+  <!-- Error and Success Messages -->
+  <div *ngIf="error" class="alert alert-error">
+    <span>{{ error }}</span>
+    <button (click)="error = null" class="close-btn">&times;</button>
+  </div>
+
+  <div *ngIf="success" class="alert alert-success">
+    <span>{{ success }}</span>
+    <button (click)="success = null" class="close-btn">&times;</button>
+  </div>
+
+  <!-- Create Playlist Button -->
+  <div class="action-bar">
+    <button *ngIf="userId && !showCreateForm"
+            (click)="toggleCreateForm()"
+            class="btn-primary create-btn">
+      <i class="icon-plus"></i> Create New Playlist
+    </button>
+  </div>
+
+  <!-- Create Playlist Form -->
+  <div *ngIf="showCreateForm" class="create-form">
+    <h3>Create a New Playlist</h3>
+    <form [formGroup]="playlistForm" (ngSubmit)="createPlaylist()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" formControlName="name"
+               placeholder="Playlist name" class="form-control">
+        <div *ngIf="playlistForm.get('name')?.invalid && playlistForm.get('name')?.touched"
+             class="error-message">
+          Playlist name is required and must be at least 2 characters
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description (optional)</label>
+        <textarea id="description" formControlName="description"
+                  placeholder="Add a description" class="form-control"></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" (click)="toggleCreateForm()" class="btn-secondary">
+          Cancel
+        </button>
+        <button type="submit" class="btn-primary" [disabled]="playlistForm.invalid || loading">
+          <span *ngIf="loading" class="spinner"></span>
+          <span *ngIf="!loading">Create Playlist</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Playlists List -->
+  <div class="playlists-content">
+    <div *ngIf="loading && !playlists.length" class="loading">
+      <div class="spinner"></div>
+      <span>Loading playlists...</span>
+    </div>
+
+    <div *ngIf="!loading && !playlists.length" class="empty-state">
+      <i class="icon-music-note"></i>
+      <p>You don't have any playlists yet.</p>
+      <button *ngIf="!showCreateForm" (click)="toggleCreateForm()" class="btn-primary">
+        Create Your First Playlist
+      </button>
+    </div>
+
+    <div *ngIf="playlists.length" class="playlist-list">
+      <div *ngFor="let playlist of playlists" class="playlist-card">
+        <div class="playlist-info">
+          <h3>{{ playlist.name }}</h3>
+          <p *ngIf="playlist.description">{{ playlist.description }}</p>
+          <p class="song-count">{{ playlist.songIds.length }} song{{ playlist.songIds.length !== 1 ? 's' : '' }}</p>
+        </div>
+        <div class="playlist-actions">
+          <button class="btn-icon" title="View playlist">
+            <span class="material-icons">
+              visibility
+              </span>
+          </button>
+          <button class="btn-icon" title="Edit playlist">
+            <span class="material-icons">
+              edit
+              </span>
+          </button>
+          <button class="btn-icon delete" (click)="deletePlaylist(playlist)" title="Delete playlist">
+            <span class="material-icons">
+              delete
+              </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

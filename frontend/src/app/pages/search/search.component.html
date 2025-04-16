@@ -1,0 +1,51 @@
+<!-- search.component.html -->
+<div class="search-container">
+  <h1>🎶 Explore Music</h1>
+
+  <input
+    type="text"
+    placeholder="🔍 Search for songs, artists..."
+    [(ngModel)]="searchTerm"
+  />
+
+  <div class="song-grid">
+    <app-song-card
+      *ngFor="let song of filteredSongs"
+      [song]="song"
+      [isPlaying]="isPlaying(song)"
+      [isFavorite]="isFavorite(song)"
+      [isInLibrary]="isInLibrary(song)"
+      (play)="playSong(song)"
+      (click)="showSongDetails(song)"
+      (pause)="pauseSong()"
+      (toggleFavorite)="toggleFavorite(song)"
+      (addToLibrary)="addToLibrary(song)"
+      (removeFromLibrary)="removeFromLibrary(song)"
+      (addToPlaylist)="openPlaylistDialog(song)">
+    </app-song-card>
+  </div>
+<!-- Song Details Modal -->
+<app-song-info
+  *ngIf="selectedSong"
+  [song]="selectedSong"
+  [visible]="showSongCard"
+  (close)="selectedSong = null; showSongCard = false"
+  (play)="playSong($event)"
+  (addToLibrary)="addToLibrary($event)"
+  (toggleFavorite)="toggleFavorite($event)">
+</app-song-info>
+
+
+<div *ngIf="showPlaylistSelector" class="playlist-popup">
+  <h4>Select a Playlist</h4>
+  <select [(ngModel)]="selectedPlaylistId">
+    <option disabled [ngValue]="null">Select Playlist</option>
+    <option *ngFor="let playlist of playlists" [value]="playlist._id">{{ playlist.name }}</option>
+  </select>
+
+  <div class="actions">
+    <button class="confirm-btn" (click)="confirmAddToPlaylist()">Add</button>
+    <button class="cancel-btn" (click)="cancelPlaylistSelection()">Cancel</button>
+  </div>
+</div>
+</div>

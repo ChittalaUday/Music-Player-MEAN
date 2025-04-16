@@ -1,0 +1,108 @@
+<div class="music-player-container">
+  <div class="player-main glass-panel">
+    <!-- Album artwork and main info -->
+    <div class="player-content">
+      <div class="album-artwork">
+        <img [src]="currentTrack.coverArt" [alt]="currentTrack.album">
+      </div>
+
+      <div class="track-info mt-4">
+        <h2 class="track-title">{{ currentTrack.title }}</h2>
+        <p class="artist-name">{{ currentTrack.artist }}</p>
+        <p class="album-name">{{ currentTrack.album }}</p>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="progress-container mt-4">
+        <input
+          type="range"
+          class="slider"
+          min="0"
+          max="100"
+          [value]="getProgressPercentage()"
+          (input)="updateProgress($event)">
+
+        <div class="time-display flex justify-between mt-1">
+          <span class="timestamp">{{ formatTime(currentTime) }}</span>
+          <span class="timestamp">{{ formatTime(currentTrack.duration) }}</span>
+        </div>
+      </div>
+
+      <!-- Player controls -->
+      <div class="player-controls mt-4">
+        <button
+          class="control-btn"
+          [class.text-primary]="isShuffleOn"
+          (click)="toggleShuffle()">
+          <i class="fas fa-random"></i>
+        </button>
+
+        <button class="control-btn" (click)="playPrevious()">
+          <i class="fas fa-step-backward"></i>
+        </button>
+
+        <button class="control-btn play-pause" (click)="togglePlay()">
+          <i class="fas" [class.fa-play]="!isPlaying" [class.fa-pause]="isPlaying"></i>
+        </button>
+
+        <button class="control-btn" (click)="playNext()">
+          <i class="fas fa-step-forward"></i>
+        </button>
+
+        <button
+          class="control-btn"
+          [class.text-primary]="repeatMode !== 'off'"
+          (click)="toggleRepeat()">
+          <i class="fas"
+             [class.fa-repeat]="repeatMode === 'all'"
+             [class.fa-sync]="repeatMode === 'one'">
+            <span *ngIf="repeatMode === 'one'" class="repeat-one">1</span>
+          </i>
+        </button>
+      </div>
+
+      <!-- Volume control -->
+      <div class="volume-control flex items-center gap-2 mt-4">
+        <button class="volume-btn control-btn" (click)="toggleMute()">
+          <i class="fas"
+             [class.fa-volume-up]="volume > 50 && !isMuted"
+             [class.fa-volume-down]="volume <= 50 && volume > 0 && !isMuted"
+             [class.fa-volume-mute]="volume === 0 || isMuted"></i>
+        </button>
+
+        <input
+          type="range"
+          class="slider"
+          min="0"
+          max="100"
+          [value]="volume"
+          (input)="updateVolume($event)">
+      </div>
+    </div>
+  </div>
+
+  <!-- Playlist -->
+  <div class="playlist-container glass-panel mt-4" [class.show]="showPlaylist">
+    <div class="playlist-header flex justify-between items-center">
+      <h3 class="playlist-title">Current Playlist</h3>
+      <button class="btn-icon" (click)="togglePlaylist()">
+        <i class="fas" [class.fa-chevron-down]="showPlaylist" [class.fa-chevron-up]="!showPlaylist"></i>
+      </button>
+    </div>
+
+    <ul class="track-list" *ngIf="showPlaylist">
+      <li *ngFor="let track of playlist"
+          class="track-item"
+          [class.active]="track.active"
+          (click)="selectTrack(track)">
+        <div class="track-item-content flex items-center justify-between">
+          <div class="track-details">
+            <p class="body-1 mb-1">{{ track.title }}</p>
+            <p class="caption">{{ track.artist }} - {{ track.album }}</p>
+          </div>
+          <span class="timestamp">{{ formatTime(track.duration) }}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

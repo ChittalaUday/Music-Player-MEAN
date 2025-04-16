@@ -1,0 +1,233 @@
+  /* Music Library Component Styling */
+  .library-container {
+    padding: var(--space-6);
+    font-family: var(--font-primary);
+    color: var(--color-on-surface);
+
+  }
+
+  section {
+    margin-bottom: var(--space-8);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .lib-card {
+    background-color: var(--color-surface-variant);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    transition: all var(--transition-normal) var(--easing-standard);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    border: 1px solid var(--color-card-border);
+    box-shadow: var(--shadow-1);
+  }
+
+  .lib-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-3);
+    border-color: var(--color-primary-dim);
+    background-color: var(--color-surface);
+  }
+
+  .card-title {
+    font-weight: 600;
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-1);
+    color: var(--color-on-surface);
+  }
+
+  app-uplaod-song{
+    max-width: 200px;
+  }
+
+  .upload-container {
+
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--space-4);
+  }
+
+  .upload-button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    background-color: var(--color-primary);
+    color: var(--color-on-surface);
+    border: none;
+    margin: 10px;
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    font-family: var(--font-ui);
+    cursor: pointer;
+    transition: all var(--transition-normal) var(--easing-standard);
+  }
+
+  .upload-button:hover {
+    background-color: var(--color-primary-variant);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2);
+  }
+
+  .upload-button:active {
+    transform: translateY(0);
+  }
+
+  .material-icons {
+    font-size: 18px;
+  }
+  /* Upload Form Styling */
+  .upload-song-container {
+    width: 100%;
+  }
+
+  .form-group {
+    margin-bottom: var(--space-4);
+  }
+
+  label {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-weight: 500;
+    color: var(--color-on-surface-medium);
+    font-family: var(--font-ui);
+    font-size: var(--text-sm);
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: var(--space-3);
+    background-color: var(--color-surface-variant);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    color: var(--color-on-surface);
+    transition: border-color var(--transition-fast) var(--easing-standard);
+  }
+
+  input[type="text"]:focus {
+    border-color: var(--color-primary);
+    outline: none;
+  }
+
+  input[type="file"] {
+    width: 100%;
+    padding: var(--space-2) 0;
+    color: var(--color-on-surface-medium);
+  }
+
+  .submit-button {
+    background-color: var(--color-primary);
+    color: var(--color-on-surface);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    font-family: var(--font-ui);
+    cursor: pointer;
+    transition: all var(--transition-normal) var(--easing-standard);
+    width: 100%;
+    margin-top: var(--space-4);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .submit-button:hover {
+    background-color: var(--color-primary-variant);
+    box-shadow: var(--shadow-2);
+  }
+
+  .submit-button:active {
+    transform: translateY(1px);
+    box-shadow: var(--shadow-1);
+  }
+
+  /* Animation Classes */
+  .fade-in {
+    animation: fadeIn var(--transition-normal) var(--easing-decelerate);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .slide-up {
+    animation: slideUp var(--transition-normal) var(--easing-decelerate);
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Add staggered animations for grid items */
+  .lib-card {
+    animation: fadeInUp 0.6s ease-out backwards;
+  }
+
+  .lib-card:nth-child(1) { animation-delay: 0.1s; }
+  .lib-card:nth-child(2) { animation-delay: 0.2s; }
+  .lib-card:nth-child(3) { animation-delay: 0.3s; }
+  .lib-card:nth-child(4) { animation-delay: 0.4s; }
+  .lib-card:nth-child(5) { animation-delay: 0.5s; }
+  .lib-card:nth-child(6) { animation-delay: 0.6s; }
+  .lib-card:nth-child(7) { animation-delay: 0.7s; }
+  .lib-card:nth-child(8) { animation-delay: 0.8s; }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .card-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+
+    .library-container {
+      padding: var(--space-4);
+    }
+
+    h2 {
+      font-size: var(--text-2xl);
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+    }
+
+    .lib-card {
+      padding: var(--space-3);
+    }
+
+    .card-title {
+      font-size: var(--text-base);
+    }
+
+    app-upload-song {
+      width: 95%;
+      padding: var(--space-4);
+    }
+  }
+

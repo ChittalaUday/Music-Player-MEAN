@@ -1,0 +1,88 @@
+<div class="login-container bg-gradient-animate bg-floating-particles">
+  <div class="company-logo logo-animate">
+    <svg viewBox="0 0 100 100" class="logo-svg">
+      <circle cx="50" cy="50" r="40" fill="var(--color-primary)" />
+      <path d="M30,50 L45,65 L70,35" stroke="white" stroke-width="8" fill="none" />
+    </svg>
+
+  </div>
+
+  <div class="login-card glass-panel">
+    <div class="login-header">
+      <h1>Welcome Back</h1>
+      <p class="subtitle-2 text-dim">Sign in to your account</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email" class="label">Email</label>
+        <div class="input-container" [class.input-error]="email?.invalid && email?.touched">
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="your.email@example.com"
+            autocomplete="email">
+        </div>
+        <div class="error-message" *ngIf="email?.invalid && email?.touched">
+          <span *ngIf="email?.errors?.['required']">Email is required</span>
+          <span *ngIf="email?.errors?.['email']">Please enter a valid email</span>
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password" class="label">Password</label>
+        <div class="input-container" [class.input-error]="password?.invalid && password?.touched">
+          <input
+            [type]="isPasswordVisible ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            placeholder="Enter your password"
+            autocomplete="current-password">
+          <button
+            type="button"
+            class="input-icon-button"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="isPasswordVisible ? 'Hide password' : 'Show password'">
+            <span class="material-icons">
+              {{ isPasswordVisible ? 'visibility' : 'visibility_off' }}
+            </span>
+          </button>
+        </div>
+        <div class="error-message" *ngIf="password?.invalid && password?.touched">
+          <span *ngIf="password?.errors?.['required']">Password is required</span>
+          <span *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters</span>
+        </div>
+      </div>
+
+      <!-- Remember Me & Forgot Password -->
+      <div class="form-utilities">
+        <a href="#" class="forgot-password body-2">Forgot password?</a>
+      </div>
+
+      <!-- Error Message -->
+      <div class="server-error" *ngIf="loginError">
+        <p class="error-text">{{ loginError }}</p>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="btn btn-primary w-full"
+        [disabled]="isSubmitting">
+        <span class="button-spinner" *ngIf="isSubmitting"></span>
+        <span>{{ isSubmitting ? 'Signing in...' : 'Sign in' }}</span>
+      </button>
+    </form>
+
+    <!-- Sign up prompt -->
+    <div class="signup-prompt text-center mt-4">
+      <p class="body-2">
+        Don't have an account?
+        <a href="#" class="signup-link" routerLink="/register">Create account</a>
+      </p>
+    </div>
+  </div>
+</div>

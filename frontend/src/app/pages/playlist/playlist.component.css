@@ -1,0 +1,117 @@
+
+.playlist-container {
+  background-color: var(--color-background);
+  color: var(--color-on-surface-medium);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.playlist-header {
+  background-color: var(--color-surface-variant);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px var(--color-primary-subtle);
+}
+
+.playlist-title {
+  color: var(--color-primary);
+  font-size: 1.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.playlist-description {
+  color: var(--color-on-surface-dim);
+}
+
+.playlist-stats .stat-item {
+  color: var(--color-on-surface);
+}
+
+.empty-state {
+  padding: 2rem;
+  background-color: var(--color-surface-variant);
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.icon-container i {
+  font-size: 3rem;
+  color: var(--color-primary-variant);
+}
+
+.songs-table {
+  background-color: var(--color-surface);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+
+.table-header, .table-row {
+  display: grid;
+  grid-template-columns: 40px 1.5fr 1fr 1fr 80px 100px;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-surface-variant);
+}
+
+.table-header {
+  background-color: var(--color-primary-dim);
+  color: var(--color-on-surface);
+  font-weight: bold;
+  border-radius: var(--radius-lg);
+}
+
+.table-row:hover {
+  background-color: var(--color-surface-variant);
+
+  border-radius: var(--radius-lg);
+}
+
+.stat-item{
+  display: flex;
+  flex-direction: column;
+}
+.song-cover {
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.delete:hover{
+  background-color: var(--color-error);
+}
+.play:hover{
+  background-color: var(--color-primary);
+}
+.song-cover:hover {
+  transform: scale(1.05);
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.3s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

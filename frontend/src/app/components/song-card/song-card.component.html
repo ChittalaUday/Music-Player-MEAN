@@ -1,0 +1,50 @@
+  <!-- song-card.component.html -->
+  <div class="song-card glass-card" >
+    <div class="song-card-content">
+      <!-- Album artwork -->
+      <div class="album-artwork" [class.playing]="isPlaying">
+        <img [src]="song.coverImageUrl || 'assets/images/default-album-cover.jpg'" [alt]="song.album || 'Album cover'" class="album-image">
+        <button class="play-overlay" (click)="togglePlay($event)" [attr.aria-label]="isPlaying ? 'Pause' : 'Play'">
+          <span class="material-icons">{{ isPlaying ? 'pause_circle' : 'play_circle' }}</span>
+        </button>
+      </div>
+
+      <!-- Song details -->
+      <div class="song-info">
+        <h3 class="track-title" [title]="song.title">{{ song.title }}</h3>
+        <p class="artist-name" [title]="getPrimaryArtist()">{{ getPrimaryArtist() }}</p>
+        <p *ngIf="song.album" class="album-name" [title]="song.album">{{ song.album }}</p>
+
+        <!-- Additional metadata -->
+        <div class="song-metadata">
+          <span *ngIf="song.year" class="year">{{ song.year }}</span>
+          <span *ngIf="song.duration" class="duration">{{ song.duration | formatDuration }}</span>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="action-buttons">
+        <button class="icon-button" (click)="onToggleFavorite($event)"
+                title="{{isFavorite ? 'Remove from favorites' : 'Add to favorites'}}">
+          <span class="material-icons">{{ isFavorite ? 'favorite' : 'favorite_border' }}</span>
+        </button>
+
+        <button class="icon-button" (click)="toggleLibrary($event)"
+                title="{{isInLibrary ? 'Remove from library' : 'Add to library'}}">
+          <span class="material-icons">{{ isInLibrary ? 'library_add_check' : 'library_add' }}</span>
+        </button>
+
+        <button class="icon-button" (click)="onAddToPlaylist($event)"
+                title="Add to playlist">
+          <span class="material-icons">playlist_add</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Combined Genre + Tags Display -->
+<div *ngIf="(song.genre?.length || 0) + (song.tags?.length || 0) > 0" class="genre-tags">
+  <span *ngFor="let genre of song.genre.slice(0, 2)" class="genre-tag ">{{ genre }}</span>
+  <span *ngFor="let tag of song.tags" class="tag ">{{ tag }}</span>
+</div>
+
+  </div>
